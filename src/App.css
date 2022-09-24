@@ -22,8 +22,27 @@
   font-size: calc(10px + 2vmin);
 }
 
+.MuiBox-root .css-19kzrtu {
+  padding: 0px;
+}
+
 .App-link {
   color: rgb(112, 76, 182);
+}
+
+.food-type-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.mango {
+  border-bottom: 1px solid #d8d5d5;
+  padding-bottom: 10px;
+}
+
+.food-image {
+  width: 50px;
+  height: 50px;
 }
 
 @keyframes App-logo-float {
