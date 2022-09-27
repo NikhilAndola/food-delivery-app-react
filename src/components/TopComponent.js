@@ -13,8 +13,13 @@ const TopComponent = () => {
         }
     }, [])
 
-    let itemsInCart = useSelector(state => state.foodDeliveryStore.cartItems.length)
-    // console.log("🚀 ~ file: TopComponent.js ~ line 17 ~ TopComponent ~ itemsInCart", itemsInCart)
+    let storeData = useSelector(state => state.foodDeliveryStore.cartItems)
+    let itemsInCart = storeData.length;
+
+    let itemCount = storeData.reduce((a,b) => {
+        return a + b.count
+    }, 0)
+    console.log("🚀 ~ file: TopComponent.js ~ line 20 ~ TopComponent ~ itemCount", itemCount)
 
   return (
     <Box  sx={{ flexGrow: 1 }} pt={2}>
@@ -26,7 +31,7 @@ const TopComponent = () => {
             <Grid item xs={6} sm={2} md={2} lg={2}>
                     <Grid item sx={{display:"flex", flexDirection:"row", justifyContent:"flex-end", paddingRight:"5px"}}>
                         <Typography color="action" variant='body2'>My Orders</Typography>
-                        <Badge badgeContent={itemsInCart} color="primary" invisible={itemsInCart === 0 ? true : false }>
+                        <Badge badgeContent={itemCount} color="primary" invisible={itemCount === 0 ? true : false }>
                             <ShoppingCartIcon color="action"/>
                         </Badge>            
                     </Grid>
