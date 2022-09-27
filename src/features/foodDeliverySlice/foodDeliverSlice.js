@@ -43,25 +43,26 @@ const foodDeliverySlice = createSlice({
             state.cartItems = [...state.cartItems, {data:action.payload, count: 1}]
           }
         },
-        removeItemToCart: (state, {payload}) => {
-            console.log(payload)
+        removeItemToCart: (state, action) => {
+          state.cartItems = action.payload;
 
-          let dataMatchedWithPayload = state.cartItems.filter((item,i) => item.data.dish_id === payload);
+          // let dataMatchedWithPayload = state.cartItems.filter((item,i) => item.data.dish_id === action.payload.dish_id);
+          // console.log("🚀 ~ file: foodDeliverSlice.js ~ line 50 ~ dataMatchedWithPayload", state)
 
 
-          if(dataMatchedWithPayload.length > 0){
-              state.cartItems = state.cartItems.map(item => {
-                if(item.data.dish_id === payload){
-                  return {data: item.data, count: item.count - 1}
-                } else {
-                  console.log("***************", test)
-                  return item;
-                }
-              })
-            } else {
-              // state.cartItems = 
-               state.cartItems.filter((item,i) => item.data.dish_id !== payload);
-            }
+          // if(dataMatchedWithPayload.length > 0){
+          //     state.cartItems = state.cartItems.map(item => {
+          //       if(item.data.dish_id === payload){
+          //         return {data: item.data, count: item.count - 1}
+          //       } else {
+          //         console.log("***************", test)
+          //         return item;
+          //       }
+          //     })
+          //   } else {
+          //     // state.cartItems = 
+          //      state.cartItems.filter((item,i) => item.data.dish_id !== payload);
+          //   }
         }
     },
     extraReducers: {

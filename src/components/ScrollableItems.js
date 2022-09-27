@@ -82,7 +82,7 @@ export default function ScrollableItems() {
             </Box>
             
             {item?.table_menu_list?.map((subItem, index) => {
-            return  <TabPanel value={value} index={index} sx={{padding: 0}} disableGutters>
+            return  <TabPanel value={value} key={index} index={index} sx={{padding: 0}} disableGutters>
                         { subItem?.category_dishes?.map((item, index) => {
                           return <SingleFoodItem foodItems={item} key={index} />
                         })

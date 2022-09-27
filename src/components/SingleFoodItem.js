@@ -1,6 +1,6 @@
 import { Avatar, Box, Grid, Typography } from '@mui/material';
 import React from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AddToCartButton from '../controls/Button';
 import { addItemToCart, removeItemToCart } from '../features/foodDeliverySlice/foodDeliverSlice';
 
@@ -17,8 +17,39 @@ const SingleFoodItem = (props) => {
       dispatch(addItemToCart(item))
   }
 
-    const handleMinusClick = (item) => {
-    dispatch(removeItemToCart(item))
+  // let storeData = useSelector(state => state.cartItems)
+  let storeData = useSelector(state => state.foodDeliveryStore.cartItems)
+  console.log("🚀 ~ file: SingleFoodItem.js ~ line 22 ~ SingleFoodItem ~ storeData", storeData)
+
+
+
+  const handleMinusClick = (elem) => {
+    const itemToBeHandled = storeData.filter(item => item.data.dish_id === elem.dish_id)
+    let finalData;
+
+    if(itemToBeHandled.length > 0 && itemToBeHandled[0].count > 1) {
+
+    let manipulatedData = itemToBeHandled.map((item) => {
+        return {data: item.data, count: item.count - 1}
+    })
+
+    finalData = storeData.map(item => {
+        if(item.data.dish_id === elem.dish_id){
+          return manipulatedData[0];
+        } else {
+          return item;
+        }
+      })
+
+    } else if(itemToBeHandled.length > 0 && itemToBeHandled[0].count === 1) {
+        finalData = storeData.filter(item => item.data.dish_id !== elem.dish_id)
+    }
+
+if(itemToBeHandled.length === 0){
+  console.log("hello")
+} else {
+  dispatch(removeItemToCart(finalData))
+}
 }
 
 if(foodItems){
@@ -29,7 +60,7 @@ if(foodItems){
             {/* <img className='food-type-icon' src="https://img.icons8.com/fluency/48/000000/non-vegetarian-food-symbol.png"/> */}
             {
             foodItems?.dish_Type === 1 ?
-              <img alt="Remy Sharp"  className='food-type-icon'  src="https://img.icons8.com/fluency/48/000000/non-vegetarian-food-symbol.png" />
+              <img alt="Remy Sharp"  className='food-type-icon' src="https://img.icons8.com/fluency/48/000000/non-vegetarian-food-symbol.png" />
               :
               <img alt="Remy Sharp" className='food-type-icon' src="https://img.icons8.com/color/48/000000/vegetarian-food-symbol.png" />
             }

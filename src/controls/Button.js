@@ -13,7 +13,7 @@ function AddToCartButton({handleClick, foodItems, foodId, handleMinusClick}) {
     let cartItems = useSelector(state => state.foodDeliveryStore.cartItems)
 
     let itemMatchFromStore = cartItems.filter(item => item.data.dish_id === foodId)
-    console.log("🚀 ~ file: Button.js ~ line 16 ~ AddToCartButton ~ itemMatchFromStore", itemMatchFromStore)
+    // console.log("🚀 ~ file: Button.js ~ line 16 ~ AddToCartButton ~ itemMatchFromStore", itemMatchFromStore)
 
     let CurrentItemCount = 0;
 
@@ -23,7 +23,7 @@ function AddToCartButton({handleClick, foodItems, foodId, handleMinusClick}) {
 
   return (
     <>
-        <Button sx={{borderRadius:"17px"}} color="success" variant="contained" size="small" startIcon={<RemoveIcon  onClick={()=> handleMinusClick(foodId)}/>} endIcon={<AddIcon onClick={()=> handleClick(foodItems)}/>}>
+        <Button sx={{borderRadius:"17px"}} color="success" variant="contained" size="small" startIcon={<RemoveIcon  onClick={()=> handleMinusClick(foodItems)}/>} endIcon={<AddIcon onClick={()=> handleClick(foodItems)}/>}>
             {CurrentItemCount}
         </Button>
     </>
